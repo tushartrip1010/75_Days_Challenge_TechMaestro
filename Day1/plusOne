@@ -1,0 +1,8 @@
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        string = ""
+        for i in digits:
+            string+=str(i)
+        new = int(string)+1
+        new_list = list(str(new))
+        return new_list
