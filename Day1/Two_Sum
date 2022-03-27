@@ -1,0 +1,10 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        d = {}
+        for i in range(0,len(nums)):
+            sec_num = target - nums[i]
+            if sec_num in d:
+                return [d[sec_num], i]
+            else:
+                d[nums[i]] = i
