@@ -1,0 +1,52 @@
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        
+        # Initialize Bounds, First time it will be full matrix
+        # Idea is to reduce these bounds every round
+        startRow = 0
+        endRow = len(matrix) - 1
+        
+        startColumn = 0
+        endColumn = len(matrix[0]) - 1
+        
+        spiral = []
+        
+        # Rounds
+        while startRow <= endRow and startColumn <= endColumn:
+            # ↓ ↓  ↓
+            # 1, 2, 3
+            # 4, 5 ,6,
+            # 7, 8, 9
+            for index in range(startColumn, endColumn + 1):
+                spiral.append(matrix[startRow][index])
+                
+            # 1, 2, 3 ←
+            # 4, 5 ,6 ←
+            # 7, 8, 9 ←
+            for index in range(startRow + 1, endRow + 1):
+                spiral.append(matrix[index][endColumn])
+            
+            # 1, 2, 3
+            # 4, 5 ,6
+            # 7, 8, 9
+            # ↑  ↑  ↑
+            for index in reversed(range(startColumn, endColumn)): # notice reversed her
+                if startRow == endRow:
+                    break
+                spiral.append(matrix[endRow][index])
+                
+            #'b'1, 2, 3   "b for break"
+            # → 4, 5 ,6
+            # → 7, 8, 9
+            for index in reversed(range(startRow + 1, endRow)): # notice reversed her
+                if startColumn == endColumn:
+                    break
+                spiral.append(matrix[index][startColumn])
+                
+            # update bounds after each round
+            startColumn += 1
+            endColumn -= 1
+            
+            startRow += 1
+            endRow -= 1
+            
+        return spiral
